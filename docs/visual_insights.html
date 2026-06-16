@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+    <style>
+        body { margin: 0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #0A192F;
+            color: #CCD6F6;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .header-section {
+            padding-top: 40px;
+            padding-left: 60px;
+            margin-bottom: 20px;
+        }
+        .slide-title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #64FFDA;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        .slide-subtitle {
+            font-size: 24px;
+            color: #8892B0;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 30px;
+            padding-left: 60px;
+            padding-right: 60px;
+        }
+        .risk-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .risk-item {
+            border: 1px solid #172A45;
+            background-color: #112240;
+            padding: 15px;
+        }
+        .risk-label {
+            font-size: 14px;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .low { color: #64FFDA; border-left: 4px solid #64FFDA; }
+        .med { color: #FFD700; border-left: 4px solid #FFD700; }
+        .high { color: #FF4D4D; border-left: 4px solid #FF4D4D; }
+        
+        .risk-desc { font-size: 14px; line-height: 1.4; color: #8892B0; }
+        .chart-container {
+            border: 1px solid #172A45;
+            background-color: #112240;
+            padding: 20px;
+            height: 450px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header-section">
+            <h1 class="slide-title">Visual Insights</h1>
+            <h2 class="slide-subtitle">Risk Clustering & Compounding Effects (CO6)</h2>
+        </div>
+        <div class="content-grid">
+            <div class="risk-list">
+                <div class="risk-item low">
+                    <span class="risk-label">Low-Risk Band</span>
+                    <p class="risk-desc">Non-smokers across all BMI levels. Costs consistently <span style="color: #64FFDA;">&lt; $15k</span>.</p>
+                </div>
+                <div class="risk-item med">
+                    <span class="risk-label">Medium-Risk Band</span>
+                    <p class="risk-desc">Smokers with BMI &lt; 30. Costs range between <span style="color: #FFD700;">$15k - $30k</span>.</p>
+                </div>
+                <div class="risk-item high">
+                    <span class="risk-label">High-Risk Band</span>
+                    <p class="risk-desc">Smokers with BMI &ge; 30. Extreme compounding costs <span style="color: #FF4D4D;">&gt; $30k</span>.</p>
+                </div>
+                <p style="font-size: 13px; color: #8892B0; margin-top: 10px; font-style: italic;">
+                    Visualized: Smoking and obesity interact to drive exponential cost increases.
+                </p>
+            </div>
+            <div class="chart-container">
+                <canvas id="bubbleChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <script>
+        const ctx = document.getElementById('bubbleChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bubble',
+            data: {
+                datasets: [
+                    {
+                        label: 'Low Risk',
+                        data: [{x: 20, y: 5000, r: 10}, {x: 25, y: 7000, r: 12}, {x: 35, y: 9000, r: 15}, {x: 45, y: 12000, r: 10}],
+                        backgroundColor: '#64FFDA'
+                    },
+                    {
+                        label: 'Medium Risk',
+                        data: [{x: 22, y: 20000, r: 12}, {x: 26, y: 25000, r: 14}, {x: 28, y: 28000, r: 12}],
+                        backgroundColor: '#FFD700'
+                    },
+                    {
+                        label: 'High Risk',
+                        data: [{x: 32, y: 40000, r: 18}, {x: 38, y: 45000, r: 22}, {x: 42, y: 55000, r: 25}],
+                        backgroundColor: '#FF4D4D'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { labels: { color: '#8892B0' } },
+                    title: { display: true, text: 'BMI vs. Charges: Risk Clustering', color: '#8892B0' }
+                },
+                scales: {
+                    x: { title: { display: true, text: 'BMI', color: '#8892B0' }, grid: { color: '#172A45' }, ticks: { color: '#8892B0' } },
+                    y: { title: { display: true, text: 'Charges ($)', color: '#8892B0' }, grid: { color: '#172A45' }, ticks: { color: '#8892B0' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

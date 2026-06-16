@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+    <style>
+        body { margin: 0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #0A192F;
+            color: #CCD6F6;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .header-section {
+            padding-top: 40px;
+            padding-left: 60px;
+            margin-bottom: 20px;
+        }
+        .slide-title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #64FFDA;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        .slide-subtitle {
+            font-size: 24px;
+            color: #8892B0;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 30px;
+            padding-left: 60px;
+            padding-right: 60px;
+        }
+        .metrics-box {
+            border: 1px solid #172A45;
+            background-color: #112240;
+            padding: 20px;
+            min-height: 480px;
+        }
+        .section-label {
+            font-size: 16px;
+            font-weight: 700;
+            color: #64FFDA;
+            text-transform: uppercase;
+            border-bottom: 2px solid #64FFDA;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #172A45;
+            padding-bottom: 6px;
+        }
+        .label { font-size: 15px; color: #8892B0; }
+        .value { font-size: 17px; font-weight: 700; color: #CCD6F6; }
+        .highlight { color: #64FFDA; }
+        .chart-container {
+            border: 1px solid #172A45;
+            background-color: #112240;
+            padding: 20px;
+            height: 300px;
+        }
+        .insight-box {
+            margin-top: 20px;
+            border-top: 1px solid #64FFDA;
+            padding-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header-section">
+            <h1 class="slide-title">CO2: Descriptive Statistics</h1>
+            <h2 class="slide-subtitle">Statistical Profile of Medical Charges</h2>
+        </div>
+        <div class="content-grid">
+            <div class="metrics-box">
+                <span class="section-label">Core Metrics</span>
+                <div class="metric-row"><span class="label">Mean</span><span class="value">$13,279.12</span></div>
+                <div class="metric-row"><span class="label">Median</span><span class="value">$9,386.16</span></div>
+                <div class="metric-row"><span class="label">Variance</span><span class="value">$146,660,811.01</span></div>
+                <div class="metric-row"><span class="label">Std Dev</span><span class="value">$12,110.36</span></div>
+                <div class="metric-row"><span class="label">Range</span><span class="value">$62,648.55</span></div>
+                <div class="metric-row"><span class="label">IQR</span><span class="value highlight">$11,911.37</span></div>
+                
+                <span class="section-label" style="margin-top: 25px;">Distribution Shape</span>
+                <div class="metric-row"><span class="label">Skewness</span><span class="value highlight">1.5154</span></div>
+                <div class="metric-row"><span class="label">Kurtosis</span><span class="value highlight">1.6042</span></div>
+            </div>
+            <div class="visual-column">
+                <div class="chart-container">
+                    <canvas id="distChart"></canvas>
+                </div>
+                <div class="insight-box">
+                    <p style="font-size: 15px; line-height: 1.6;">
+                        <span class="highlight">Visual Insight:</span> The distribution exhibits a <span class="highlight">Strong Right Skew</span>. The mean is significantly pulled higher than the median by the high-cost "long tail" of extreme claims.
+                    </p>
+                    <p style="font-size: 14px; color: #8892B0; margin-top: 10px;">
+                        90th Percentile: $34,832.74 | Q3: $16,657.72
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const ctx = document.getElementById('distChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['0-5k', '5-10k', '10-15k', '15-20k', '20-25k', '25-30k', '30-35k', '35-40k', '40k+'],
+                datasets: [{
+                    label: 'Frequency',
+                    data: [450, 300, 180, 120, 80, 60, 50, 40, 58],
+                    backgroundColor: '#64FFDA',
+                    borderColor: '#64FFDA',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'Medical Charges Distribution Frequency', color: '#8892B0' }
+                },
+                scales: {
+                    x: { grid: { display: false }, ticks: { color: '#8892B0' } },
+                    y: { grid: { color: '#172A45' }, ticks: { color: '#8892B0' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

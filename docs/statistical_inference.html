@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { margin: 0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #0A192F;
+            color: #CCD6F6;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .header-section {
+            padding-top: 40px; /* must keep */
+            padding-left: 60px;
+            margin-bottom: 20px;
+        }
+        .slide-title { font-size: 48px; font-weight: 900; color: #64FFDA; margin-bottom: 8px; text-transform: uppercase; }
+        .slide-subtitle { font-size: 24px; color: #8892B0; }
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px; /* reduced from 30 to save height */
+            padding-left: 60px;
+            padding-right: 60px;
+        }
+        .data-box {
+            border: 1px solid #172A45;
+            background-color: #112240;
+            padding: 12px; /* reduced from 20 to save height */
+            min-height: 440px; /* reduced from 480 to bring content under 720px */
+        }
+        .box-header { font-size: 18px; font-weight: 700; color: #64FFDA; text-transform: uppercase; border-bottom: 2px solid #64FFDA; padding-bottom: 8px; margin-bottom: 12px; display: block; }
+        .stat-row { display: flex; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px solid #172A45; padding-bottom: 6px; }
+        .label { font-size: 15px; color: #8892B0; }
+        .value { font-size: 16px; font-weight: 700; color: #CCD6F6; }
+        .highlight { color: #64FFDA; }
+        .decision-highlight { margin-top: 12px; background-color: #172A45; border: 1px solid #64FFDA; padding: 12px; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header-section">
+            <h1 class="slide-title">Statistical Inference</h1>
+            <h2 class="slide-subtitle">Hypothesis Testing & Sampling (CO4)</h2>
+        </div>
+        <div class="content-grid">
+            <div class="data-box">
+                <span class="box-header">Sampling Distribution & CI</span>
+                <div class="stat-row"><span class="label">Bootstrap Samples</span><span class="value">1000 (n=50)</span></div>
+                <div class="stat-row"><span class="label">Mean of Sample Means</span><span class="value">$13,275.03</span></div>
+                <div class="stat-row"><span class="label">Std of Sample Means</span><span class="value">$1,657.57</span></div>
+                <div class="stat-row"><span class="label">Population Mean</span><span class="value">$13,279.12</span></div>
+                <div class="stat-row" style="margin-top: 12px;"><span class="label">Standard Error</span><span class="value highlight">$331.20</span></div>
+                <div class="stat-row"><span class="label">95% Confidence Interval</span><span class="value highlight">[$12,629.97, $13,928.27]</span></div>
+            </div>
+            <div class="data-box">
+                <span class="box-header">t-Test & Inference Errors</span>
+                <div class="stat-row"><span class="label">t-statistic</span><span class="value">46.6448</span></div>
+                <div class="stat-row"><span class="label">p-value</span><span class="value">1.41e-282</span></div>
+                <div class="stat-row" style="margin-top: 12px;"><span class="label">Type I Error (α)</span><span class="value">0.05</span></div>
+                <div class="stat-row"><span class="label">Type II Error (β)</span><span class="value">0.20</span></div>
+                <div class="stat-row"><span class="label">Power of Test</span><span class="value highlight">0.80</span></div>
+                <div class="decision-highlight">
+                    <p style="font-size: 14px; font-weight: 900; color: #64FFDA; text-transform: uppercase; margin-bottom: 5px;">Statistical Decision</p>
+                    <p style="font-size: 18px; font-weight: 700; color: #FFFFFF;">Reject Null Hypothesis (H₀)</p>
+                    <p style="font-size: 13px; color: #CCD6F6; margin-top: 5px;">Smoking status has a highly significant impact on medical charges.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

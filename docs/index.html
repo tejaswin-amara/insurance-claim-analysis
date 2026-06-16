@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insurance Claim Analysis Presentation</title>
+    <style>
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #0A192F; font-family: 'Inter', sans-serif; }
+        #slide-frame { width: 100%; height: 100%; border: none; }
+        #controls { position: fixed; bottom: 20px; right: 20px; display: flex; gap: 10px; z-index: 100; }
+        button { background: #64FFDA; color: #0A192F; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; border-radius: 4px; }
+        button:hover { background: #52d1b2; }
+        #page-info { color: #8892B0; align-self: center; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <iframe id="slide-frame" src="title_slide.html"></iframe>
+    <div id="controls">
+        <div id="page-info">Slide 1 / 12</div>
+        <button onclick="prevSlide()">Previous</button>
+        <button onclick="nextSlide()">Next</button>
+    </div>
+
+    <script>
+        const slides = [
+            "title_slide.html", "project_overview.html", "methodology_mapping.html",
+            "data_preprocessing.html", "descriptive_stats.html", "probability_analysis.html",
+            "statistical_inference.html", "correlation_regression.html", "multiple_regression.html",
+            "visual_insights.html", "conclusion_recommendations.html", "thank_you.html"
+        ];
+        let currentIdx = 0;
+        const frame = document.getElementById('slide-frame');
+        const pageInfo = document.getElementById('page-info');
+
+        function updateSlide() {
+            frame.src = slides[currentIdx];
+            pageInfo.innerText = `Slide ${currentIdx + 1} / ${slides.length}`;
+        }
+
+        function nextSlide() {
+            if (currentIdx < slides.length - 1) {
+                currentIdx++;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentIdx > 0) {
+                currentIdx--;
+                updateSlide();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "ArrowRight") nextSlide();
+            if (e.key === "ArrowLeft") prevSlide();
+        });
+    </script>
+</body>
+</html>

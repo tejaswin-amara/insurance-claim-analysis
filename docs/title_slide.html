@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { margin: 0; }
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #0A192F;
+            color: #CCD6F6;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-sizing: border-box;
+        }
+        .accent-bar {
+            position: absolute;
+            left: 0;
+            top: 15%;
+            height: 70%;
+            width: 12px;
+            background-color: #64FFDA;
+        }
+        .content-wrapper {
+            width: 1000px;
+            text-align: center;
+        }
+        .main-title {
+            font-size: 72px;
+            font-weight: 900;
+            color: #64FFDA;
+            margin-bottom: 10px;
+            letter-spacing: -2px;
+            line-height: 1.1;
+        }
+        .subtitle {
+            font-size: 24px;
+            font-weight: 400;
+            color: #8892B0;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .presenter-box {
+            margin-bottom: 50px;
+        }
+        .presenter-name {
+            font-size: 36px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 5px;
+        }
+        .presenter-details {
+            font-size: 18px;
+            color: #8892B0;
+        }
+        .academic-footer {
+            width: 100%;
+            position: absolute;
+            bottom: 60px;
+            border-top: 1px solid #172A45;
+            padding-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+        .footer-item {
+            font-size: 16px;
+            color: #CCD6F6;
+        }
+        .label {
+            color: #64FFDA;
+            font-weight: 700;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="accent-bar"></div>
+        <div class="content-wrapper">
+            <h1 class="main-title">Insurance Claim Analysis</h1>
+            <h2 class="subtitle">MDSA Capstone Project | Mathematics for Data Science and Analytics</h2>
+            
+            <div class="presenter-box">
+                <p class="presenter-name">Tejaswin Amara</p>
+                <p class="presenter-details">CSIT Major | Roll Number: 2520090104</p>
+            </div>
+        </div>
+        
+        <div class="academic-footer">
+            <div class="footer-item"><span class="label">University:</span>KLH University (Bachupally Campus)</div>
+            <div class="footer-item"><span class="label">Coverage:</span>CO1 – CO6</div>
+            <div class="footer-item"><span class="label">Dataset:</span>Kaggle Insurance (1,338 records)</div>
+        </div>
+    </div>
+</body>
+</html>
