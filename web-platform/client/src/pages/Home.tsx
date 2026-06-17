@@ -7,6 +7,7 @@ import PredictionPlayground from "@/components/PredictionPlayground";
 import CohortExplorer from "@/components/CohortExplorer";
 import AnalyticsVisuals from "@/components/AnalyticsVisuals";
 import AcademicMapping from "@/components/AcademicMapping";
+import RegionalMap from "@/components/RegionalMap";
 import { Calculator, Table, BarChart3, GraduationCap, Filter, Sparkles } from "lucide-react";
 
 export default function Home() {
@@ -96,84 +97,92 @@ export default function Home() {
 
       {/* Main Content Area */}
       <main className="container flex-1 py-8 space-y-8">
-        {/* Conditional Shared Filters for explorer/analytics tabs */}
+        {/* Conditional Shared Filters and Map for explorer/analytics tabs */}
         {(activeTab === "explorer" || activeTab === "analytics") && (
-          <Card className="bg-slate-900/30 border-slate-900 p-4 shadow-md flex flex-wrap items-center gap-4 text-xs">
-            <div className="flex items-center gap-1.5 text-slate-400 font-bold shrink-0 uppercase tracking-wider text-[10px]">
-              <Filter className="w-3.5 h-3.5 text-blue-400" /> Cohort Filters:
-            </div>
-            
-            {/* Smoker */}
-            <div className="flex items-center gap-2">
-              <Label className="text-slate-500">Tobacco</Label>
-              <Select value={smoker} onValueChange={setSmoker}>
-                <SelectTrigger className="w-36 bg-slate-950 border-slate-850 text-slate-300 h-8 text-[11px] rounded-lg">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent className="bg-slate-950 border-slate-850">
-                  <SelectItem value="all" className="text-xs">All Profiles</SelectItem>
-                  <SelectItem value="yes" className="text-xs">Smokers Only</SelectItem>
-                  <SelectItem value="no" className="text-xs">Non-Smokers Only</SelectItem>
-                </SelectContent>
-              </Select>
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+            <div className="xl:col-span-2">
+              <RegionalMap selectedRegion={region} onSelectRegion={setRegion} />
             </div>
 
-            {/* Sex */}
-            <div className="flex items-center gap-2">
-              <Label className="text-slate-500">Sex</Label>
-              <Select value={sex} onValueChange={setSex}>
-                <SelectTrigger className="w-28 bg-slate-950 border-slate-850 text-slate-300 h-8 text-[11px] rounded-lg">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent className="bg-slate-950 border-slate-850">
-                  <SelectItem value="all" className="text-xs">Both</SelectItem>
-                  <SelectItem value="male" className="text-xs">Male</SelectItem>
-                  <SelectItem value="female" className="text-xs">Female</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            {/* Region */}
-            <div className="flex items-center gap-2">
-              <Label className="text-slate-500">Region</Label>
-              <Select value={region} onValueChange={setRegion}>
-                <SelectTrigger className="w-36 bg-slate-950 border-slate-850 text-slate-300 h-8 text-[11px] rounded-lg">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent className="bg-slate-950 border-slate-850">
-                  <SelectItem value="all" className="text-xs">All US Regions</SelectItem>
-                  <SelectItem value="northeast" className="text-xs">Northeast</SelectItem>
-                  <SelectItem value="northwest" className="text-xs">Northwest</SelectItem>
-                  <SelectItem value="southeast" className="text-xs">Southeast</SelectItem>
-                  <SelectItem value="southwest" className="text-xs">Southwest</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            {/* Age Limits */}
-            <div className="flex items-center gap-2 ml-auto">
-              <Label className="text-slate-500">Age</Label>
-              <div className="flex items-center gap-1.5 bg-slate-950 px-2 py-1 border border-slate-850 rounded-lg h-8">
-                <input
-                  type="number"
-                  value={minAge}
-                  onChange={(e) => setMinAge(Math.max(18, Math.min(maxAge, Number(e.target.value))))}
-                  className="w-8 bg-transparent text-center text-slate-300 focus:outline-none text-[11px]"
-                  min={18}
-                  max={64}
-                />
-                <span className="text-slate-700">-</span>
-                <input
-                  type="number"
-                  value={maxAge}
-                  onChange={(e) => setMaxAge(Math.max(minAge, Math.min(64, Number(e.target.value))))}
-                  className="w-8 bg-transparent text-center text-slate-300 focus:outline-none text-[11px]"
-                  min={18}
-                  max={64}
-                />
+            <Card className="bg-slate-900/30 border-slate-900 p-5 shadow-md flex flex-col justify-center space-y-4 text-xs">
+              <div className="flex items-center gap-1.5 text-slate-400 font-bold uppercase tracking-wider text-[10px]">
+                <Filter className="w-3.5 h-3.5 text-blue-400" /> Filter Controls:
               </div>
-            </div>
-          </Card>
+
+              <div className="grid grid-cols-2 gap-4">
+                {/* Smoker */}
+                <div className="space-y-1.5">
+                  <Label className="text-slate-500 text-[11px]">Tobacco</Label>
+                  <Select value={smoker} onValueChange={setSmoker}>
+                    <SelectTrigger className="w-full bg-slate-950 border-slate-850 text-slate-300 h-8 text-[11px] rounded-lg">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent className="bg-slate-950 border-slate-850">
+                      <SelectItem value="all" className="text-xs">All Profiles</SelectItem>
+                      <SelectItem value="yes" className="text-xs">Smokers Only</SelectItem>
+                      <SelectItem value="no" className="text-xs">Non-Smokers Only</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Sex */}
+                <div className="space-y-1.5">
+                  <Label className="text-slate-500 text-[11px]">Sex</Label>
+                  <Select value={sex} onValueChange={setSex}>
+                    <SelectTrigger className="w-full bg-slate-950 border-slate-850 text-slate-300 h-8 text-[11px] rounded-lg">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent className="bg-slate-950 border-slate-850">
+                      <SelectItem value="all" className="text-xs">Both</SelectItem>
+                      <SelectItem value="male" className="text-xs">Male</SelectItem>
+                      <SelectItem value="female" className="text-xs">Female</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Region Dropdown (synced with Map) */}
+                <div className="space-y-1.5">
+                  <Label className="text-slate-500 text-[11px]">Region Dropdown</Label>
+                  <Select value={region} onValueChange={setRegion}>
+                    <SelectTrigger className="w-full bg-slate-950 border-slate-850 text-slate-300 h-8 text-[11px] rounded-lg">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent className="bg-slate-950 border-slate-850">
+                      <SelectItem value="all" className="text-xs">All US Regions</SelectItem>
+                      <SelectItem value="northeast" className="text-xs">Northeast</SelectItem>
+                      <SelectItem value="northwest" className="text-xs">Northwest</SelectItem>
+                      <SelectItem value="southeast" className="text-xs">Southeast</SelectItem>
+                      <SelectItem value="southwest" className="text-xs">Southwest</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Age limits */}
+                <div className="space-y-1.5">
+                  <Label className="text-slate-500 text-[11px]">Age Cohort</Label>
+                  <div className="flex items-center gap-1 bg-slate-950 px-2 border border-slate-850 rounded-lg h-8 w-full justify-between">
+                    <input
+                      type="number"
+                      value={minAge}
+                      onChange={(e) => setMinAge(Math.max(18, Math.min(maxAge, Number(e.target.value))))}
+                      className="w-8 bg-transparent text-center text-slate-300 focus:outline-none text-[11px]"
+                      min={18}
+                      max={64}
+                    />
+                    <span className="text-slate-700 text-[10px]">to</span>
+                    <input
+                      type="number"
+                      value={maxAge}
+                      onChange={(e) => setMaxAge(Math.max(minAge, Math.min(64, Number(e.target.value))))}
+                      className="w-8 bg-transparent text-center text-slate-300 focus:outline-none text-[11px]"
+                      min={18}
+                      max={64}
+                    />
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </div>
         )}
 
         {/* Render Active Tab Component */}

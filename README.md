@@ -142,7 +142,11 @@ insurance-claim-analysis/
 └── web-platform/                     # Interactive React Frontend Code
     ├── client/                       # Dashboard UI Source (Vite, React 19, Tailwind v4)
     │   ├── src/
-    │   │   ├── components/           # Tab components (Playground, Explorer, Analytics)
+    │   │   ├── components/           # Tab components
+    │   │   │   ├── RegionalMap.tsx   # [NEW] Interactive SVG US Region Map
+    │   │   │   ├── AnalyticsVisuals.tsx # Live T-Test, Correlation, and Diagnostic Plots
+    │   │   │   ├── CohortExplorer.tsx # Paginated data grid with cohort filters
+    │   │   │   └── PredictionPlayground.tsx # Real-time interactive model simulator
     │   │   ├── data/
     │   │   │   └── insuranceData.ts  # Client-side static data and model weights
     │   │   └── lib/
@@ -159,8 +163,11 @@ insurance-claim-analysis/
 Simply open [https://tejaswin-amara.github.io/insurance-claim-analysis/](https://tejaswin-amara.github.io/insurance-claim-analysis/) in any browser.
 * **Features:**
   * **Prediction Playground:** Sliders to input age, BMI, and dependents. Toggle tobacco status and see standard vs interaction rates compare side-by-side.
+  * **Interactive US Regional Risk Map:** A geographic SVG-based map representing the four quadrants of the US. Click any region to filter the cohort, and hover to see live regional statistics (Sample Size, Avg Claim, Smoker %, Avg BMI) calculated directly in the browser.
   * **Cohort Explorer:** A searchable and filterable database table of all 1,337 beneficiaries calculating cohort mean, median, standard deviation, and skewness instantly.
   * **Statistical Analytics:** Dynamic Welch's T-Test calculations, a live Pearson Correlation Heatmap, and interactive Recharts scatter/distribution plots.
+  * **Regression Diagnostics (CO6):** Client-side Actual vs. Predicted scatter plot (with $y=x$ reference line) and Residuals vs. Fitted plot (with $y=0$ reference line) to visually verify OLS assumptions like homoscedasticity.
+  * **Executive Underwriting Report:** A one-click markdown report compiler that exports active cohort stats, hypothesis tests, and OLS formulas to the clipboard.
 
 ---
 
