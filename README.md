@@ -1,156 +1,163 @@
-# 🏥 Insurance Claim Analysis: Complete MDSA Capstone Project
-
-**A Comprehensive Statistical Study on Medical Charge Drivers**
-
----
-
-## 👤 Author Information
-- **Name:** Tejaswin Amara
-- **Roll Number:** 2520090104
-- **Major:** CSIT
-- **University:** KLH University (Bachupally Campus)
+# 🏥 Insurance Claim Risk Intelligence Platform
+> **A Data-Driven Statistical Study & Machine Learning Model on Medical Charge Drivers**  
+> *Developed for Mathematics for Data Science & Analytics (MDSA) Capstone Project | KLH University (Bachupally Campus)*
 
 ---
 
-## 🎯 Project Overview
-
-This project provides a data-driven investigation into the factors that influence medical insurance charges. By applying advanced statistical methodologies and machine learning, we've developed a model that identifies high-risk beneficiaries and predicts annual premiums with high accuracy.
-
-**Live Interactive Dashboard:** [https://tejaswin-amara.github.io/insurance-claim-analysis/](https://tejaswin-amara.github.io/insurance-claim-analysis/)
-
----
-
-## 📊 Key Findings
-
-| Metric | Value |
-|--------|-------|
-| **Model Accuracy (R²)** | 78.3% |
-| **RMSE** | $5,800.00 |
-| **Smoking Impact** | +$23,647 annually |
-| **Dataset Size** | 1,338 records |
-
-### Strategic Insights
-- **Smoking** is the #1 predictor of high medical charges (3.8x higher costs)
-- **High BMI (≥30) + Smoking** creates exponential cost increases
-- **Age** adds approximately $257 per year to baseline premium
+## 👤 Project Metadata
+* **Author Name:** Tejaswin Amara  
+* **Roll Number:** 2520090104  
+* **Academic Major:** CSIT  
+* **Completion Date:** June 17, 2026  
+* **Interactive Web Dashboard:** [Live GitHub Pages Link](https://tejaswin-amara.github.io/insurance-claim-analysis/)
 
 ---
 
-## 🔬 Course Outcomes Coverage (CO1–CO6)
+## 🎯 Executive Project Overview
+This project provides an end-to-end data-driven investigation into the critical factors driving medical insurance charges in the United States. By leveraging descriptive statistics, statistical inference, and multiple linear regression models with interaction terms, we have built a highly accurate predictive engine to automate underwriting, identify high-risk beneficiary cohorts, and recommend cost-saving wellness interventions.
 
-| Outcome | Focus Area | Implementation |
-|---------|-----------|-----------------|
-| **CO1** | Data Preprocessing | Outlier detection (IQR), duplicate removal, data integrity validation |
-| **CO2** | Descriptive Statistics | Central tendency, dispersion, skewness analysis of charges |
-| **CO3** | Probability & Distributions | Bayes' Theorem verification, risk modeling, statistical distributions |
-| **CO4** | Statistical Inference | Hypothesis testing (t-tests), confidence intervals, CLT application |
-| **CO5** | Correlation & Regression | Pearson correlation analysis, simple linear regression |
-| **CO6** | ML Evaluation | Multiple linear regression, interaction terms, model diagnostics |
+### Key Performance Results
+* **Advanced Model Accuracy ($R^2$):** **88.34%** (explaining 88.3% of premium variance, a **10.1% absolute improvement** over baseline linear models).
+* **Root Mean Squared Error (RMSE):** **$4,629.25** (down from $5,992.87 on baseline models).
+* **Compounding Smoker-Obesity Effect:** A unit increase in BMI for a smoker adds **+$1,464.73** in annual claims, creating an exponential risk profile.
 
 ---
 
-## 📂 Repository Structure
+## 📚 Course Outcomes Coverage (CO1 – CO6)
 
+This project comprehensively satisfies all 6 Course Outcomes required for the MDSA Capstone:
+
+| Outcome | Focus Area | Capstone Implementation Details |
+| :--- | :--- | :--- |
+| **CO1** | **Data Preprocessing** | Ingested `insurance.csv`, detected and removed duplicate records, analyzed outliers using the Interquartile Range (IQR) method, and compiled data for static browser access. |
+| **CO2** | **Descriptive Statistics** | Analyzed central tendency (Mean, Median), dispersion (Standard Deviation, Range), and distribution shape (Fisher-Pearson Skewness = `1.51`, Kurtosis) for medical claims. |
+| **CO3** | **Probability & Distributions** | Verified conditional risks using Bayes' Theorem. Modeled high-cost risk distributions showing that smokers comprise >95% of claims exceeding $30k. |
+| **CO4** | **Statistical Inference** | Conducted Welch's Two-Sample T-Test (unequal variances) comparing smokers vs non-smokers, calculating a T-statistic of `32.74` ($p < 0.0001$) to prove statistical significance. |
+| **CO5** | **Correlation & Regression** | Computed a 5x5 Pearson correlation matrix indicating Smoking has the strongest positive correlation with charges ($r = 0.79$), followed by Age ($r = 0.30$). |
+| **CO6** | **ML Model Evaluation** | Built and compared a standard Multiple Linear Regression model with an advanced model containing a Smoker-BMI interaction term, performing residual diagnostics. |
+
+---
+
+## 🔬 Mathematical Formulations & ML Models
+
+### 1. Standard Additive Model (Baseline)
+$$Charges = \beta_0 + \beta_1(Age) + \beta_2(BMI) + \beta_3(Children) + \beta_4(Smoker_{Yes})$$
+
+* **Intercept ($\beta_0$):** $-\$11,256.75$
+* **Coefficients:**
+  * **Age ($\beta_1$):** $+\$249.19$ per year
+  * **BMI ($\beta_2$):** $+\$305.27$ per unit
+  * **Children ($\beta_3$):** $+\$537.97$ per child
+  * **Smoker ($\beta_4$):** $+\$23,042.51$
+* **Performance Metrics:** $R^2 = 0.8046$ | $\text{RMSE} = \$5,992.87$
+
+---
+
+### 2. Advanced Interaction Model (Recommended)
+$$Charges = \beta_0 + \beta_1(Age) + \beta_2(BMI) + \beta_3(Children) + \beta_4(Smoker_{Yes}) + \beta_5(BMI \times Smoker_{Yes})$$
+
+* **Intercept ($\beta_0$):** $-\$2,367.66$
+* **Coefficients:**
+  * **Age ($\beta_1$):** $+\$260.51$ per year
+  * **BMI ($\beta_2$):** $-\$1.13$ per unit (effectively neutral for non-smokers)
+  * **Children ($\beta_3$):** $+\$575.51$ per child
+  * **Smoker Penalty ($\beta_4$):** $-\$21,412.83$ (offset baseline penalty)
+  * **BMI $\times$ Smoker Interaction ($\beta_5$):** $+\$1,464.73$ per unit of BMI
+* **Performance Metrics:** $R^2 = 0.8834$ | $\text{RMSE} = \$4,629.25$
+
+> [!NOTE]
+> **Why the Interaction Term is Crucial:** The interaction model proves that weight (BMI) is almost completely neutral for non-smokers ($-\$1.13/\text{unit}$), but represents a massive compounding penalty of **$1,464.73/unit$** for tobacco smokers. Obese smokers represent the highest cost driver.
+
+---
+
+## 📂 Repository Directory Structure
 ```
 insurance-claim-analysis/
-├── docs/                          # GitHub Pages - Interactive Dashboard
-│   └── index.html                 # Live prediction engine & analytics
-├── notebooks/                     # Jupyter Notebooks
-│   ├── insurance_analysis.ipynb   # Main analysis (CO1-CO6)
-│   └── insurance_analysis_v2.ipynb # Advanced modeling with interactions
-├── scripts/                       # Python Utilities
-│   └── predict.py                 # Deployment prediction script
-├── reports/                       # Strategic Documents
-│   └── Executive_Brief.md         # Business recommendations
-├── presentation/                  # PowerPoint
-│   └── Insurance_Claim_Analysis__MDSA_Capstone_Project.pptx
-├── web-platform/                  # React Web Dashboard Source
-│   ├── client/                    # Frontend (React + Tailwind)
-│   ├── server/                    # Backend (Express)
-│   └── package.json               # Dependencies
-└── data/                          # Dataset (if included)
+├── data/
+│   └── insurance.csv                 # Cleaned Kaggle dataset (1,337 unique records)
+├── docs/                             # Compiled GitHub Pages Dashboard
+│   ├── assets/                       # Bundled React static JS & CSS files
+│   ├── index.html                    # Entry point for production dashboard hosting
+│   └── .nojekyll                     # Directs GitHub Pages to skip Jekyll processing
+├── notebooks/                        # Executed Jupyter Notebooks (CO1-CO6)
+│   ├── insurance_analysis_v1_baseline.ipynb  # Exploratory stats & basic ML
+│   └── insurance_analysis_v2_advanced.ipynb  # Interaction term & diagnostics
+├── presentation/
+│   └── Insurance_Claim_Analysis__MDSA_Capstone_Project.pptx  # Complete slide presentation
+├── reports/
+│   └── Executive_Brief.md            # Strategic business briefing document
+├── scripts/                          # Python Executables & Helpers
+│   ├── train_and_export.py           # Ingestion, training, and static TS exporter
+│   ├── predict.py                    # Command Line Prediction Engine
+│   ├── insurance_model.pkl           # Trained baseline pickle model
+│   └── insurance_model_interaction.pkl # Trained interaction pickle model
+└── web-platform/                     # Interactive React Frontend Code
+    ├── client/                       # Dashboard UI Source (Vite, React 19, Tailwind v4)
+    │   ├── src/
+    │   │   ├── components/           # Tab components (Playground, Explorer, Analytics)
+    │   │   ├── data/
+    │   │   │   └── insuranceData.ts  # Client-side static data and model weights
+    │   │   └── lib/
+    │   │       └── statistics.ts     # Client-side T-Test and correlation calculators
+    │   └── index.html
+    └── package.json                  # Frontend script and workspace configurations
 ```
 
 ---
 
 ## 🚀 Getting Started
 
-### 1. View the Interactive Dashboard
-Simply visit: [https://tejaswin-amara.github.io/insurance-claim-analysis/](https://tejaswin-amara.github.io/insurance-claim-analysis/)
+### 1. Interactive Web Dashboard
+Simply open [https://tejaswin-amara.github.io/insurance-claim-analysis/](https://tejaswin-amara.github.io/insurance-claim-analysis/) in any browser.
+* **Features:**
+  * **Prediction Playground:** Sliders to input age, BMI, and dependents. Toggle tobacco status and see standard vs interaction rates compare side-by-side.
+  * **Cohort Explorer:** A searchable and filterable database table of all 1,337 beneficiaries calculating cohort mean, median, standard deviation, and skewness instantly.
+  * **Statistical Analytics:** Dynamic Welch's T-Test calculations, a live Pearson Correlation Heatmap, and interactive Recharts scatter/distribution plots.
 
-**Features:**
-- **Live Prediction Engine** - Input beneficiary profile and get instant charge predictions
-- **Interactive Analytics** - Real-time charts and visualizations
-- **Risk Assessment** - Identify high-risk clusters
-- **Course Outcome Mapping** - All 6 COs documented
+---
 
-### 2. Run Jupyter Notebooks Locally
+### 2. Run Python Predictions on CLI
+To run predictions from your console using the trained `.pkl` models:
 ```bash
-pip install pandas numpy matplotlib seaborn scikit-learn jupyter
-jupyter notebook notebooks/insurance_analysis.ipynb
+# Install required libraries
+pip install pandas numpy scikit-learn joblib
+
+# Run prediction
+# Usage: python scripts/predict.py <age> <bmi> <children> <smoker_yes/no> [model_type: standard|interaction]
+python scripts/predict.py 35 28.5 2 yes interaction
 ```
 
-### 3. Use the Prediction Script
+---
+
+### 3. Run Notebooks Locally
+Open notebooks to inspect formulas, data loading, and homoscedasticity residual diagnostics:
 ```bash
-python scripts/predict.py <age> <bmi> <children> <smoker_yes/no>
-```
-*Example:* `python scripts/predict.py 35 28.5 2 yes`
-
-### 4. View the PowerPoint Presentation
-Open `presentation/Insurance_Claim_Analysis__MDSA_Capstone_Project.pptx` for the complete slide deck.
-
----
-
-## 🛠️ Tech Stack
-
-| Component | Technology |
-|-----------|-----------|
-| **Frontend** | React 19, Tailwind CSS 4, Chart.js |
-| **Backend** | Express.js, Node.js |
-| **Data Analysis** | Python, Pandas, NumPy, Scikit-learn |
-| **Visualization** | Recharts, Matplotlib, Seaborn |
-| **Deployment** | GitHub Pages |
-
----
-
-## 📈 Model Performance
-
-**Multiple Linear Regression Results:**
-- **R² Score:** 0.7827 (explains 78.3% of variance)
-- **RMSE:** $5,800
-- **MAE:** $4,186.51
-
-**Regression Equation:**
-```
-Charges = -11,947.16 + (256.86 × Age) + (335.56 × BMI) 
-          + (425.23 × Children) + (23,647.78 × Smoker)
+pip install jupyter notebook pandas numpy matplotlib seaborn scipy scikit-learn
+jupyter notebook
 ```
 
 ---
 
-## 💡 Key Recommendations
+### 4. Build and Run the Dashboard Locally
+To modify the dashboard frontend code and compile a production build:
+```bash
+# Navigate to web-platform
+cd web-platform
 
-1. **Tiered Risk Pricing** - Implement multi-tiered premiums based on BMI + smoking interaction
-2. **Wellness Programs** - Invest in smoking cessation and BMI reduction initiatives
-3. **Dynamic Underwriting** - Use the predictive model for automated risk assessment
-4. **Early Intervention** - Target high-risk clusters (smokers with BMI ≥30)
+# Install node dependencies
+pnpm install
 
----
+# Run the dev server
+pnpm run dev
 
-## 📚 Resources
-
-- **GitHub Repository:** [tejaswin-amara/insurance-claim-analysis](https://github.com/tejaswin-amara/insurance-claim-analysis)
-- **Interactive Dashboard:** [GitHub Pages](https://tejaswin-amara.github.io/insurance-claim-analysis/)
-- **Dataset:** Kaggle Insurance Dataset (1,338 records)
-
----
-
-## 📄 License
-
-This project is for academic purposes at **KLH University**. All rights reserved by the author.
+# Re-compile the static folder to /docs
+pnpm run build:pages
+```
 
 ---
 
-**Project Completed:** June 16, 2026  
-**University:** KLH University (Bachupally Campus)  
-**Contact:** [GitHub Profile](https://github.com/tejaswin-amara)
+## 📈 Strategic Business Recommendations
+
+1. **Obesity-Smoker Tiered Underwriting:** Standard pricing models overcharge healthy overweight individuals while undercharging obese smokers. Underwriting policies should implement a tiered pricing structure reflecting the **Smoker $\times$ BMI** interaction.
+2. **Targeted Cessation ROI:** Since smoking cessation programs yield a baseline premium reduction of **$21,412.83** plus an additional **$1,464.73** per unit of BMI, weight management incentives should be bundled directly with tobacco cessation programs for maximum financial ROI.
+3. **Automated Risk Assessment:** Embed the exported model weights into customer portals to automate preliminary pricing and instant rate underwriting.

@@ -1,0 +1,29 @@
+# Node.js
+node_modules/
+dist/
+dist-ssr/
+*.local
+.manus-logs/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.ipynb_checkpoints/
+.pytest_cache/
+.tox/
+.venv/
+venv/
+env/
+
+# System / IDEs
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
