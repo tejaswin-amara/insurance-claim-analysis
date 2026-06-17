@@ -60,6 +60,7 @@ export default function RegionalMap({ selectedRegion, onSelectRegion }: Regional
     {
       id: "northwest",
       name: "Northwest",
+      abbrev: "NW",
       color: "from-blue-600 to-cyan-500",
       stroke: "#2563eb",
       // Path represents top-left US
@@ -70,6 +71,7 @@ export default function RegionalMap({ selectedRegion, onSelectRegion }: Regional
     {
       id: "northeast",
       name: "Northeast",
+      abbrev: "NE",
       color: "from-indigo-600 to-purple-500",
       stroke: "#4f46e5",
       // Path represents top-right US
@@ -80,6 +82,7 @@ export default function RegionalMap({ selectedRegion, onSelectRegion }: Regional
     {
       id: "southwest",
       name: "Southwest",
+      abbrev: "SW",
       color: "from-teal-600 to-emerald-500",
       stroke: "#0d9488",
       // Path represents bottom-left US
@@ -90,6 +93,7 @@ export default function RegionalMap({ selectedRegion, onSelectRegion }: Regional
     {
       id: "southeast",
       name: "Southeast",
+      abbrev: "SE",
       color: "from-emerald-600 to-green-500",
       stroke: "#059669",
       // Path represents bottom-right US (includes Florida)
@@ -162,7 +166,7 @@ export default function RegionalMap({ selectedRegion, onSelectRegion }: Regional
                 : "bg-slate-950/80 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700"
             }`}
           >
-            {r.name.substring(0, 2)}
+            {r.abbrev}
           </button>
         ))}
       </div>
