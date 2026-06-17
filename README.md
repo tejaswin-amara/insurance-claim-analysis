@@ -4,10 +4,20 @@
 
 ---
 
+<p align="center">
+  <img src="https://img.shields.io/badge/Mathematics-Data%20Science-blue?style=for-the-badge&logo=jupyter" alt="Math" />
+  <img src="https://img.shields.io/badge/Machine%20Learning-Regression-teal?style=for-the-badge&logo=scikit-learn" alt="ML" />
+  <img src="https://img.shields.io/badge/Frontend-React%2019%20%2B%20Tailwind%20v4-indigo?style=for-the-badge&logo=react" alt="React" />
+  <img src="https://img.shields.io/badge/Deployment-GitHub%20Pages-emerald?style=for-the-badge&logo=github" alt="GitHub Pages" />
+</p>
+
+---
+
 ## 👤 Project Metadata
 * **Author Name:** Tejaswin Amara  
 * **Roll Number:** 2520090104  
 * **Academic Major:** CSIT  
+* **Academic Institution:** KLH University (Bachupally Campus)  
 * **Completion Date:** June 17, 2026  
 * **Interactive Web Dashboard:** [Live GitHub Pages Link](https://tejaswin-amara.github.io/insurance-claim-analysis/)
 
@@ -23,18 +33,56 @@ This project provides an end-to-end data-driven investigation into the critical 
 
 ---
 
+## ⚙️ Data Engineering & Machine Learning Pipeline
+
+```mermaid
+graph TD
+    A["Raw Dataset (insurance.csv)"] --> B("Ingestion & Preprocessing (scripts/train_and_export.py)")
+    B -->|Remove Duplicates| C["Cleaned Dataset (1,337 records)"]
+    C --> D("Model 1: Standard Multiple Linear Regression")
+    C --> E("Model 2: Advanced Interaction Regression")
+    D -->|Coefficient Exporter| F["insuranceData.ts (Client Data File)"]
+    E -->|Coefficient Exporter| F
+    D -->|Joblib Serialization| G["insurance_model.pkl"]
+    E -->|Joblib Serialization| H["insurance_model_interaction.pkl"]
+    F --> I["React + Tailwind v4 Static Dashboard (Vite)"]
+    I -->|Build compilation| J["Static Assets (docs/)"]
+    J -->|Serverless Hosting| K["Live GitHub Pages Dashboard"]
+```
+
+---
+
 ## 📚 Course Outcomes Coverage (CO1 – CO6)
 
 This project comprehensively satisfies all 6 Course Outcomes required for the MDSA Capstone:
 
-| Outcome | Focus Area | Capstone Implementation Details |
-| :--- | :--- | :--- |
-| **CO1** | **Data Preprocessing** | Ingested `insurance.csv`, detected and removed duplicate records, analyzed outliers using the Interquartile Range (IQR) method, and compiled data for static browser access. |
-| **CO2** | **Descriptive Statistics** | Analyzed central tendency (Mean, Median), dispersion (Standard Deviation, Range), and distribution shape (Fisher-Pearson Skewness = `1.51`, Kurtosis) for medical claims. |
-| **CO3** | **Probability & Distributions** | Verified conditional risks using Bayes' Theorem. Modeled high-cost risk distributions showing that smokers comprise >95% of claims exceeding $30k. |
-| **CO4** | **Statistical Inference** | Conducted Welch's Two-Sample T-Test (unequal variances) comparing smokers vs non-smokers, calculating a T-statistic of `32.74` ($p < 0.0001$) to prove statistical significance. |
-| **CO5** | **Correlation & Regression** | Computed a 5x5 Pearson correlation matrix indicating Smoking has the strongest positive correlation with charges ($r = 0.79$), followed by Age ($r = 0.30$). |
-| **CO6** | **ML Model Evaluation** | Built and compared a standard Multiple Linear Regression model with an advanced model containing a Smoker-BMI interaction term, performing residual diagnostics. |
+### 🧹 CO1: Data Preprocessing & Quality Verification
+- **Description:** Cleaning, duplicate removal, outlier analysis, and dataset structure validation.
+- **Implementation:** Staged in [train_and_export.py](file:///D:/insurance-claim-analysis/repo/scripts/train_and_export.py). Duplicate beneficiary records were identified and dropped, and claim outliers were analyzed using the Interquartile Range (IQR) method.
+
+### 📊 CO2: Descriptive Statistics
+- **Description:** Central tendency (mean, median), dispersion (variance, standard deviation), skewness, and kurtosis.
+- **Implementation:** Computed dynamically in the **Cohort Explorer** tab of the React dashboard. Select custom brackets (e.g. non-smokers in the southwest) to see updated descriptive statistics on-the-fly.
+
+### 🎲 CO3: Probability & Risk Distributions
+- **Description:** Applying Bayes' Theorem and examining likelihood of high-cost events.
+- **Implementation:** Explored in [insurance_analysis_v1_baseline.ipynb](file:///D:/insurance-claim-analysis/repo/notebooks/insurance_analysis_v1_baseline.ipynb). We verified conditional risk profiles using Bayes' Theorem:
+  $$P(\text{Smoker} \mid \text{High Claim}) = \frac{P(\text{High Claim} \mid \text{Smoker}) \times P(\text{Smoker})}{P(\text{High Claim})}$$
+  Showing that smokers occupy over 95% of claims exceeding $30,000 despite representing only ~20% of the population.
+
+### 🧮 CO4: Statistical Inference & Hypothesis Testing
+- **Description:** Applying Central Limit Theorem, confidence intervals, and hypothesis testing.
+- **Implementation:** Coded dynamically in JavaScript on the **Statistical Analytics** tab. It runs a **Welch's Two-Sample T-Test** (assumes unequal variances) comparing smokers vs non-smokers:
+  $$t = \frac{\bar{X}_1 - \bar{X}_2}{\sqrt{\frac{s_1^2}{N_1} + \frac{s_2^2}{N_2}}}$$
+  It outputs the T-statistic ($t = 32.74$), degrees of freedom, and p-value ($p < 0.0001$) to prove statistical significance.
+
+### 📈 CO5: Correlation & Simple Linear Regression
+- **Description:** Pearson correlation coefficient, heatmaps, and simple regression equations.
+- **Implementation:** Computed live in the React dashboard. We construct a 5x5 dynamic Pearson correlation matrix and color-code it as an interactive heatmap, highlighting that Smoking status ($r = 0.79$) and Age ($r = 0.30$) represent the strongest cost predictors.
+
+### 🤖 CO6: Machine Learning & Model Evaluation
+- **Description:** Multiple linear regression, interaction terms, diagnostics, and metrics ($R^2$, RMSE, MAE).
+- **Implementation:** Implemented in [insurance_analysis_v2_advanced.ipynb](file:///D:/insurance-claim-analysis/repo/notebooks/insurance_analysis_v2_advanced.ipynb). It compares baseline multiple regression to the advanced interaction model, evaluating Gauss-Markov assumptions via residual diagnostics (normality and homoscedasticity check).
 
 ---
 
@@ -45,11 +93,11 @@ $$Charges = \beta_0 + \beta_1(Age) + \beta_2(BMI) + \beta_3(Children) + \beta_4(
 
 * **Intercept ($\beta_0$):** $-\$11,256.75$
 * **Coefficients:**
-  * **Age ($\beta_1$):** $+\$249.19$ per year
-  * **BMI ($\beta_2$):** $+\$305.27$ per unit
-  * **Children ($\beta_3$):** $+\$537.97$ per child
+  * **Age ($\beta_1$):** $+\$249.19$ per year of life
+  * **BMI ($\beta_2$):** $+\$305.27$ per unit of BMI
+  * **Children ($\beta_3$):** $+\$537.97$ per dependent
   * **Smoker ($\beta_4$):** $+\$23,042.51$
-* **Performance Metrics:** $R^2 = 0.8046$ | $\text{RMSE} = \$5,992.87$
+* **Performance Metrics:** $R^2 = 0.8046$ | $\text{RMSE} = \$5,992.87$ | $\text{MAE} = \$4,198.59$
 
 ---
 
@@ -58,14 +106,14 @@ $$Charges = \beta_0 + \beta_1(Age) + \beta_2(BMI) + \beta_3(Children) + \beta_4(
 
 * **Intercept ($\beta_0$):** $-\$2,367.66$
 * **Coefficients:**
-  * **Age ($\beta_1$):** $+\$260.51$ per year
+  * **Age ($\beta_1$):** $+\$260.51$ per year of life
   * **BMI ($\beta_2$):** $-\$1.13$ per unit (effectively neutral for non-smokers)
-  * **Children ($\beta_3$):** $+\$575.51$ per child
-  * **Smoker Penalty ($\beta_4$):** $-\$21,412.83$ (offset baseline penalty)
+  * **Children ($\beta_3$):** $+\$575.51$ per dependent
+  * **Smoker Penalty ($\beta_4$):** $-\$21,412.83$ (baseline adjustment)
   * **BMI $\times$ Smoker Interaction ($\beta_5$):** $+\$1,464.73$ per unit of BMI
-* **Performance Metrics:** $R^2 = 0.8834$ | $\text{RMSE} = \$4,629.25$
+* **Performance Metrics:** $R^2 = 0.8834$ | $\text{RMSE} = \$4,629.25$ | $\text{MAE} = \$2,828.54$
 
-> [!NOTE]
+> [!IMPORTANT]
 > **Why the Interaction Term is Crucial:** The interaction model proves that weight (BMI) is almost completely neutral for non-smokers ($-\$1.13/\text{unit}$), but represents a massive compounding penalty of **$1,464.73/unit$** for tobacco smokers. Obese smokers represent the highest cost driver.
 
 ---
@@ -158,6 +206,6 @@ pnpm run build:pages
 
 ## 📈 Strategic Business Recommendations
 
-1. **Obesity-Smoker Tiered Underwriting:** Standard pricing models overcharge healthy overweight individuals while undercharging obese smokers. Underwriting policies should implement a tiered pricing structure reflecting the **Smoker $\times$ BMI** interaction.
-2. **Targeted Cessation ROI:** Since smoking cessation programs yield a baseline premium reduction of **$21,412.83** plus an additional **$1,464.73** per unit of BMI, weight management incentives should be bundled directly with tobacco cessation programs for maximum financial ROI.
+1. **Obesity-Smoker Tiered Underwriting:** Standard pricing models overcharge healthy overweight individuals while undercharging obese smokers. Underwriting policies should implement a premium structure that multiplies BMI by smoking status (reflecting the $+\$1,464.73/\text{unit}$ interaction) rather than simple flat surcharges.
+2. **Targeted Cessation ROI:** Since smoking cessation plans yield a baseline premium reduction of **$21,412.83** plus an additional **$1,464.73** per unit of BMI, weight management incentives should be bundled directly with tobacco cessation programs for maximum financial ROI.
 3. **Automated Risk Assessment:** Embed the exported model weights into customer portals to automate preliminary pricing and instant rate underwriting.
